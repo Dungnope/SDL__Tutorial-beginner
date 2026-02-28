@@ -1,6 +1,6 @@
 # Khai báo các biến để dễ quản lý và thay đổi sau này
 CXX = g++
-COMMON_FLAGS = -std=c++14 -m64 -Wall -I include
+COMMON_FLAGS = -std=c++17 -m64 -Wall -I include
 LDFLAGS = -lSDL2main -lSDL2 -lSDL2_image
 
 # Thư mục chứa kết quả
