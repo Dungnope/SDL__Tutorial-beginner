@@ -11,9 +11,11 @@ int main(int argc, char* args[]) {
         std::cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
         return 1;
     }
+    
+    std::cout << "Test" << std::endl;
 
     // 2. Tạo cửa sổ game
-    SDL_Window* window = SDL_CreateWindow("Duan Game Dau Tay - Test Movement", 
+    SDL_Window* window = SDL_CreateWindow("First game test for structure - Test Movement", 
                             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
                             SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (window == nullptr) {
