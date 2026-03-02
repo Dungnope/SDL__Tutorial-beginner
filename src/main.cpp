@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "RenderWindow.hpp"
-#include "player.hpp"
 int main(int argc, char* args[]){
 
     //check to see whether init failed
