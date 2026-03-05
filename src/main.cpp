@@ -15,14 +15,27 @@ int main(int argc, char* args[]){
 
     RenderWindow window("Hello Game v2.0", 1024, 576);
     SDL_Texture* groundTexture = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground.png");
+    SDL_Texture* groundTexture2 = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground2.png");
     
     //initilize entity
-    Entity entities[4] = {
+    // Entity entities[4] = {
+    //     Entity(32, 0, groundTexture),
+    //     Entity(32, 32, groundTexture),
+    //     Entity(0, 64, groundTexture),
+    //     Entity(64, 64, groundTexture),
+    // };
+
+    std::vector<Entity> entities = {
         Entity(32, 0, groundTexture),
         Entity(32, 32, groundTexture),
         Entity(0, 64, groundTexture),
         Entity(64, 64, groundTexture),
     };
+
+    {    
+        Entity plank(32, 0, groundTexture2);
+        entities.push_back(plank);
+    }
 
     bool gameRunning = true; 
     
@@ -39,10 +52,8 @@ int main(int argc, char* args[]){
         window.clearScreen();
         //render the tetexture
 
-        for(int i = 0; i < 1024; i+= 32)
-        {
-            Entity wall = Entity(i, 0, groundTexture);
-            window.renderer(wall);
+        for(Entity& e : entities){
+            window.renderer(e);
         }
 
         //show the screen after render texture
