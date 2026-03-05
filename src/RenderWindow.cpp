@@ -26,8 +26,8 @@ SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
         std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
     }
     return texture;
-
 }
+
 void RenderWindow::cleanUp(){
     //turn off the window is SDL_Window* window;
     SDL_DestroyWindow(window);
@@ -39,8 +39,23 @@ void RenderWindow::clearScreen(){
 }
 
 void RenderWindow::renderer(SDL_Texture* p_texture){
+
+
+    // show actual size of texture
+    SDL_Rect *src = new SDL_Rect; //source texture
+    src->x = -1;
+    src->y = -1;
+    src->w = 256;
+    src->h = 256;
+
+    SDL_Rect *dst = new SDL_Rect; //destination
+    dst->x = 0;
+    dst->y = 0;
+    dst->w = src->w * 2;
+    dst->h = src->h * 2;
+
     // copy texture from source and the render will point p_texture;
-    SDL_RenderCopy(render, p_texture, nullptr, nullptr);
+    SDL_RenderCopy(render, p_texture, src, dst);
 }
 
 void RenderWindow::display(){

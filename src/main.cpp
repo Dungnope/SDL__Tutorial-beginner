@@ -11,12 +11,11 @@ int main(int argc, char* args[]){
     //check image init failed
     if(!IMG_Init(IMG_INIT_PNG)) std::cout << "IMG_init has failed" << SDL_GetError() << std::endl;
 
-    RenderWindow window("Hello Game v2.0", 640, 480);
-
+    RenderWindow window("Hello Game v2.0", 1024, 576);
     SDL_Texture* groundTexture = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground.png");
 
-    bool gameRunning = true;
-
+    bool gameRunning = true; 
+    
     //to make event;
     SDL_Event event;
 
@@ -26,10 +25,9 @@ int main(int argc, char* args[]){
         while(SDL_PollEvent(&event)){
             if(event.type == SDL_QUIT) gameRunning = false;
         }
-
         //clear whole screen
         window.clearScreen();
-        //render the texture;
+        //render the tetexture
         window.renderer(groundTexture);
         //show the screen after render texture
         window.display();

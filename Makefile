@@ -32,3 +32,5 @@ release:
 clean:
 	rm -rf bin/debug/main bin/release/main
 	rm -f *.o
+run:
+	./bin/debug/main
