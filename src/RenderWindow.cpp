@@ -2,6 +2,7 @@
 #include<SDL2/SDL_image.h>
 #include<iostream>
 
+#include"Entity.hpp"
 #include"RenderWindow.hpp"
 
 RenderWindow::RenderWindow(const char* p_title, int p_width, int p_height):window(nullptr), render(nullptr)
@@ -38,24 +39,24 @@ void RenderWindow::clearScreen(){
     SDL_RenderClear(render);
 }
 
-void RenderWindow::renderer(SDL_Texture* p_texture){
+void RenderWindow::renderer(Entity &p_entity){
 
 
     // show actual size of texture
     SDL_Rect *src = new SDL_Rect; //source texture
-    src->x = -1;
-    src->y = -1;
-    src->w = 256;
-    src->h = 256;
+    src->x = p_entity.getcurrentFrame().x;
+    src->y = p_entity.getcurrentFrame().y;
+    src->w = p_entity.getcurrentFrame().w;
+    src->h = p_entity.getcurrentFrame().h;
 
-    SDL_Rect *dst = new SDL_Rect; //destination
-    dst->x = 0;
-    dst->y = 0;
-    dst->w = src->w * 2;
-    dst->h = src->h * 2;
+    SDL_Rect *dst = new SDL_Rect; //destination, can change position, size image
+    dst->x = p_entity.getX() * 4;
+    dst->y = p_entity.getY() * 4;
+    dst->w =  p_entity.getcurrentFrame().w * 4;
+    dst->h =  p_entity.getcurrentFrame().h * 4;
 
     // copy texture from source and the render will point p_texture;
-    SDL_RenderCopy(render, p_texture, src, dst);
+    SDL_RenderCopy(render, p_entity.getTexture(), src, dst);
 }
 
 void RenderWindow::display(){

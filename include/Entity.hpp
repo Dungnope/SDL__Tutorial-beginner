@@ -6,6 +6,10 @@
 class Entity{
 public:
     Entity(float p_x, float p_y, SDL_Texture* p_texture); //p_ is parameter
+    float getX();
+    float getY();
+    SDL_Texture* getTexture();
+    SDL_Rect getcurrentFrame();
 private:
     //coordinate of entity
     double x, y;

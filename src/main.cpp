@@ -1,8 +1,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include<vector>
 
 #include "RenderWindow.hpp"
+#include "Entity.hpp"
 int main(int argc, char* args[]){
 
     //check to see whether init failed
@@ -13,6 +15,14 @@ int main(int argc, char* args[]){
 
     RenderWindow window("Hello Game v2.0", 1024, 576);
     SDL_Texture* groundTexture = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground.png");
+    
+    //initilize entity
+    Entity entities[4] = {
+        Entity(32, 0, groundTexture),
+        Entity(32, 32, groundTexture),
+        Entity(0, 64, groundTexture),
+        Entity(64, 64, groundTexture),
+    };
 
     bool gameRunning = true; 
     
@@ -28,7 +38,13 @@ int main(int argc, char* args[]){
         //clear whole screen
         window.clearScreen();
         //render the tetexture
-        window.renderer(groundTexture);
+
+        for(int i = 0; i < 1024; i+= 32)
+        {
+            Entity wall = Entity(i, 0, groundTexture);
+            window.renderer(wall);
+        }
+
         //show the screen after render texture
         window.display();
     }
