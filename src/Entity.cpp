@@ -3,8 +3,8 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(float p_x, float p_y, SDL_Texture* p_texture)
-:x(p_x), y(p_y), texture(p_texture)
+Entity::Entity(Vector2f p_position, SDL_Texture* p_texture)
+:position(p_position),  texture(p_texture)
 {
     currentFrame.x = 0;
     currentFrame.y = 0;
@@ -12,8 +12,6 @@ Entity::Entity(float p_x, float p_y, SDL_Texture* p_texture)
     currentFrame.h = 32;
 }
 
-float Entity::getX(){ return x;}
-float Entity::getY(){ return y;}
 
 SDL_Texture* Entity::getTexture(){
     return texture;
@@ -21,4 +19,8 @@ SDL_Texture* Entity::getTexture(){
 
 SDL_Rect Entity::getcurrentFrame(){
     return currentFrame;
+}
+
+Vector2f& Entity::getPos(){
+    return position;
 }

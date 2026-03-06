@@ -50,8 +50,8 @@ void RenderWindow::renderer(Entity &p_entity){
     src->h = p_entity.getcurrentFrame().h;
 
     SDL_Rect *dst = new SDL_Rect; //destination, can change position, size image
-    dst->x = p_entity.getX() * 4;
-    dst->y = p_entity.getY() * 4;
+    dst->x = p_entity.getPos().x * 4;
+    dst->y = p_entity.getPos().y * 4;
     dst->w =  p_entity.getcurrentFrame().w * 4;
     dst->h =  p_entity.getcurrentFrame().h * 4;
 

@@ -26,14 +26,14 @@ int main(int argc, char* args[]){
     // };
 
     std::vector<Entity> entities = {
-        Entity(32, 0, groundTexture),
-        Entity(32, 32, groundTexture),
-        Entity(0, 64, groundTexture),
-        Entity(64, 64, groundTexture),
+        Entity(Vector2f(32, 0), groundTexture),
+        Entity(Vector2f(32, 32), groundTexture),
+        Entity(Vector2f(0, 64), groundTexture),
+        Entity(Vector2f(64, 64), groundTexture),
     };
 
     {    
-        Entity plank(32, 0, groundTexture2);
+        Entity plank(Vector2f(0, 32), groundTexture2);
         entities.push_back(plank);
     }
 
