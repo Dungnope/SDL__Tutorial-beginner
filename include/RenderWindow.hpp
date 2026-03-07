@@ -9,6 +9,8 @@ class RenderWindow{
 
         //to load texture
         SDL_Texture* loadTexture(const char* p_filePath);
+
+        int getRefreshRate();
         void cleanUp(); //destroy window
         void clearScreen(); //to delete buffer
         void renderer(Entity& p_entity);

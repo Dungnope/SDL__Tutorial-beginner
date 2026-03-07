@@ -29,6 +29,16 @@ SDL_Texture* RenderWindow::loadTexture(const char* p_filePath)
     return texture;
 }
 
+int RenderWindow::getRefreshRate(){
+    int displayIndex = SDL_GetWindowDisplayIndex(window);
+
+    SDL_DisplayMode mode;
+
+    SDL_GetDisplayMode(displayIndex, 0, &mode);
+
+    return mode.refresh_rate;
+}
+
 void RenderWindow::cleanUp(){
     //turn off the window is SDL_Window* window;
     SDL_DestroyWindow(window);

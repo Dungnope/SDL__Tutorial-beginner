@@ -5,6 +5,7 @@
 
 #include "RenderWindow.hpp"
 #include "Entity.hpp"
+#include "Ultils.hpp"
 int main(int argc, char* args[]){
 
     //check to see whether init failed
@@ -14,6 +15,7 @@ int main(int argc, char* args[]){
     if(!IMG_Init(IMG_INIT_PNG)) std::cout << "IMG_init has failed" << SDL_GetError() << std::endl;
 
     RenderWindow window("Hello Game v2.0", 1024, 576);
+
     SDL_Texture* groundTexture = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground.png");
     SDL_Texture* groundTexture2 = window.loadTexture("/home/dyul/SDL2__Platformer/res/gfx/Ground2.png");
     
@@ -39,15 +41,37 @@ int main(int argc, char* args[]){
 
     bool gameRunning = true; 
     
+    const float timeStep = 0.01;
+    float accumulator = 0.0f;
+    float currentTime = utils::hireTimeInSeconds();
+
     //to make event;
     SDL_Event event;
 
     //make the window show until destroy event trigger with 'X'
     while(gameRunning)
     {
-        while(SDL_PollEvent(&event)){
-            if(event.type == SDL_QUIT) gameRunning = false;
+        int startTick = SDL_GetTicks();
+
+        float newTime = utils::hireTimeInSeconds();
+        float frameTime = newTime - currentTime;
+
+        currentTime = newTime;
+        
+        accumulator += frameTime;
+
+        while(accumulator >= timeStep)
+        {
+            while(SDL_PollEvent(&event)){
+                if(event.type == SDL_QUIT) gameRunning = false;
+            }
+
+            accumulator -= timeStep;
+
         }
+
+        // const float alpha = accumulator / timeStep; // 50%
+
         //clear whole screen
         window.clearScreen();
         //render the tetexture
@@ -58,6 +82,13 @@ int main(int argc, char* args[]){
 
         //show the screen after render texture
         window.display();
+
+        int frameTicks = SDL_GetTicks() - startTick;
+
+        if(frameTicks < 1000 / window.getRefreshRate()){
+            SDL_Delay(1000 / window.getRefreshRate() - frameTicks);
+        }
+        
     }
 
     window.cleanUp();
